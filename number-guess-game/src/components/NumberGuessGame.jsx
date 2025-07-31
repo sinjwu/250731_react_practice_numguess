@@ -5,19 +5,20 @@ const getRandomTarget = () => Math.floor(Math.random() * 100) + 1;
 const NumberGuessGame = () => {
   const [target, setTarget] = useState(getRandomTarget);
   const [guess, setGuess] = useState("");
+  const [message, setMessage] = useState("");
   const handleSubmit = () => {
     console.log("타겟:", target);
     const num = Number(guess);
     if (isNaN(num) || num < 1 || num > 100) {
-      console.log("1부터 100 사이의 숫자를 입력하세요");
+      setMessage("1부터 100 사이의 숫자를 입력하세요");
       return;
     }
     if (num === target) {
-      console.log(`정답!${target}입니다`);
+      setMessage(`정답!${target}입니다`);
     } else if (num < target) {
-      console.log("더 큰 수를 입력하세요");
+      setMessage("더 큰 수를 입력하세요");
     } else {
-      console.log("더 작은 수를 입력하세요");
+      setMessage("더 작은 수를 입력하세요");
     }
   };
   return (
@@ -36,6 +37,7 @@ const NumberGuessGame = () => {
       >
         제출
       </button>
+      <p className="text-lg font-medium">{message}</p>
     </div>
   );
 };
